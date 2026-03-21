@@ -1,4 +1,4 @@
-# Semana 1
+### Semana 1
 
 Temas base reforzados:
 
@@ -10,9 +10,6 @@ Temas base reforzados:
 - bubble sort: orden local/global, invariante, monotonicidad, finitud
 - eficiencia y robustez con ejemplos pequenos
 
-## Estructura autocontenida
-
-Ya no depende de `externo/`.
 
 ### Cabeceras principales
 
