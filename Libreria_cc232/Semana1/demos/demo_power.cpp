@@ -1,6 +1,7 @@
 #include <iostream>
 #include "power.h"
 
+// Ejemplo simple
 int main() {
     const long long base = 3;
     const int exp = 5;
