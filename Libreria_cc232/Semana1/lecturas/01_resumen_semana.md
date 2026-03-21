@@ -1,4 +1,4 @@
-# Resumen — Semana 1
+### Resumen - Semana 1
 
 ## Idea central
 Conectar problema, especificacion, implementacion y costo.
