@@ -1,6 +1,6 @@
 ### Semana 2
 
-Esta semana introduce las primeras estructuras de datos dinámicas basadas en arreglos, con énfasis en memoria contigua, crecimiento de capacidad, costo amortizado y organización eficiente del acceso. 
+Esta semana introduce las primeras estructuras de datos dinámicas basadas en arreglos, con énfasis en memoria contigua, crecimiento de capacidad, costo amortizado y organización eficiente del acceso.
 Además, se presentan variantes que permiten estudiar distintos compromisos entre simplicidad, costo de actualización y uso de memoria.
 
 #### Temas trabajados
@@ -13,6 +13,7 @@ Además, se presentan variantes que permiten estudiar distintos compromisos entr
 - Deques y rebalanceo
 - rootish arrays
 - `fast sqrt` como apoyo matemático del capítulo 2
+- vector estilo Deng como puente entre teoría y código de la semana
 
 #### Estructuras cubiertas en esta versión
 
@@ -24,10 +25,11 @@ Además, se presentan variantes que permiten estudiar distintos compromisos entr
 - `DualArrayDeque`
 - `RootishArrayStack`
 - `FastSqrt`
+- `DengVector`
 
 ### Build
 
-Desde la raíz del repositorio:
+Desde la raíz de `Semana2`:
 
 #### Linux/macOS o generadores single-config
 
@@ -35,7 +37,7 @@ Desde la raíz del repositorio:
 cmake -S . -B build
 cmake --build build -j
 ctest --test-dir build --output-on-failure
-````
+```
 
 #### Windows con Visual Studio o generadores multi-config
 
@@ -66,6 +68,7 @@ ctest --test-dir build -C Release --output-on-failure
 * `sem2_demo_rootisharraystack`
 * `sem2_demo_fastsqrt`
 * `sem2_demo_capitulo2_panorama`
+* `sem2_demo_deng_vector`
 * `sem2_demo_arraystack_explicado`: capacidad, desplazamientos e invariante
 * `sem2_demo_rootisharraystack_explicado`: bloques, mapeo índice -> (bloque, offset) y crecimiento
 * `sem2_demo_stl_vector_contraste`: contraste conceptual con `std::vector`
@@ -86,50 +89,52 @@ Si compilaste con:
 cmake --build build --config Debug
 ```
 
-entonces los ejecutables quedan dentro de `build/Semana2/Debug/`.
+entonces los ejecutables quedan dentro de `build/Debug/` o `build/Semana2/Debug/`, según el generador.
 
 #### PowerShell o CMD
 
 ```powershell
-.\build\Semana2\Debug\sem2_demo_array_basico.exe
-.\build\Semana2\Debug\sem2_demo_arraystack.exe
-.\build\Semana2\Debug\sem2_demo_arraystack_explicado.exe
-.\build\Semana2\Debug\sem2_demo_fastarraystack.exe
-.\build\Semana2\Debug\sem2_demo_arrayqueue.exe
-.\build\Semana2\Debug\sem2_demo_arraydeque.exe
-.\build\Semana2\Debug\sem2_demo_dualarraydeque.exe
-.\build\Semana2\Debug\sem2_demo_rootisharraystack.exe
-.\build\Semana2\Debug\sem2_demo_rootisharraystack_explicado.exe
-.\build\Semana2\Debug\sem2_demo_fastsqrt.exe
-.\build\Semana2\Debug\sem2_demo_capitulo2_panorama.exe
-.\build\Semana2\Debug\sem2_demo_stl_vector_contraste.exe
-.\build\Semana2\Debug\sem2_test_public.exe
-.\build\Semana2\Debug\sem2_test_internal.exe
-.\build\Semana2\Debug\sem2_resize_stress.exe
-.\build\Semana2\Debug\sem2_test_public_cap2.exe
-.\build\Semana2\Debug\sem2_test_internal_cap2.exe
+.\build\Debug\sem2_demo_array_basico.exe
+.\build\Debug\sem2_demo_arraystack.exe
+.\build\Debug\sem2_demo_arraystack_explicado.exe
+.\build\Debug\sem2_demo_fastarraystack.exe
+.\build\Debug\sem2_demo_arrayqueue.exe
+.\build\Debug\sem2_demo_arraydeque.exe
+.\build\Debug\sem2_demo_dualarraydeque.exe
+.\build\Debug\sem2_demo_rootisharraystack.exe
+.\build\Debug\sem2_demo_rootisharraystack_explicado.exe
+.\build\Debug\sem2_demo_fastsqrt.exe
+.\build\Debug\sem2_demo_capitulo2_panorama.exe
+.\build\Debug\sem2_demo_deng_vector.exe
+.\build\Debug\sem2_demo_stl_vector_contraste.exe
+.\build\Debug\sem2_test_public.exe
+.\build\Debug\sem2_test_internal.exe
+.\build\Debug\sem2_resize_stress.exe
+.\build\Debug\sem2_test_public_cap2.exe
+.\build\Debug\sem2_test_internal_cap2.exe
 ```
 
 #### Git Bash
 
 ```bash
-./build/Semana2/Debug/sem2_demo_array_basico.exe
-./build/Semana2/Debug/sem2_demo_arraystack.exe
-./build/Semana2/Debug/sem2_demo_arraystack_explicado.exe
-./build/Semana2/Debug/sem2_demo_fastarraystack.exe
-./build/Semana2/Debug/sem2_demo_arrayqueue.exe
-./build/Semana2/Debug/sem2_demo_arraydeque.exe
-./build/Semana2/Debug/sem2_demo_dualarraydeque.exe
-./build/Semana2/Debug/sem2_demo_rootisharraystack.exe
-./build/Semana2/Debug/sem2_demo_rootisharraystack_explicado.exe
-./build/Semana2/Debug/sem2_demo_fastsqrt.exe
-./build/Semana2/Debug/sem2_demo_capitulo2_panorama.exe
-./build/Semana2/Debug/sem2_demo_stl_vector_contraste.exe
-./build/Semana2/Debug/sem2_test_public.exe
-./build/Semana2/Debug/sem2_test_internal.exe
-./build/Semana2/Debug/sem2_resize_stress.exe
-./build/Semana2/Debug/sem2_test_public_cap2.exe
-./build/Semana2/Debug/sem2_test_internal_cap2.exe
+./build/Debug/sem2_demo_array_basico.exe
+./build/Debug/sem2_demo_arraystack.exe
+./build/Debug/sem2_demo_arraystack_explicado.exe
+./build/Debug/sem2_demo_fastarraystack.exe
+./build/Debug/sem2_demo_arrayqueue.exe
+./build/Debug/sem2_demo_arraydeque.exe
+./build/Debug/sem2_demo_dualarraydeque.exe
+./build/Debug/sem2_demo_rootisharraystack.exe
+./build/Debug/sem2_demo_rootisharraystack_explicado.exe
+./build/Debug/sem2_demo_fastsqrt.exe
+./build/Debug/sem2_demo_capitulo2_panorama.exe
+./build/Debug/sem2_demo_deng_vector.exe
+./build/Debug/sem2_demo_stl_vector_contraste.exe
+./build/Debug/sem2_test_public.exe
+./build/Debug/sem2_test_internal.exe
+./build/Debug/sem2_resize_stress.exe
+./build/Debug/sem2_test_public_cap2.exe
+./build/Debug/sem2_test_internal_cap2.exe
 ```
 
 #### Nota sobre `ctest` en Windows
@@ -166,6 +171,9 @@ Con estas piezas, la semana 2 queda preparada para explicar:
 * Operaciones en colas, pilas y deques
 * Estrategias de rebalanceo entre arreglos
 * Representación por bloques en `RootishArrayStack`
-* Relación entre diseño de estructura de datos y eficiencia.
+* Constructor por copia, asignación y recorrido en un vector propio
+* Relación entre diseño de estructura de datos y eficiencia
 
+#### Enfoque de integración
 
+`DengVector` vive como implementación paralela a Morin. No reemplaza `ArrayStack`, `FastArrayStack` ni `RootishArrayStack`; sirve para conectar los códigos del capítulo 2 de Deng con los invariantes y pruebas de la semana.
