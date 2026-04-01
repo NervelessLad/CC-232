@@ -11,7 +11,7 @@ Asimismo, se destaca la importancia de comparar estas estructuras no solo en té
 En conjunto, el estudio de estas estructuras permite comprender que toda elección de representación implica compromisos concretos entre rapidez de acceso, flexibilidad de actualización y costo estructural. Por ello, más que aprender operaciones aisladas, resulta fundamental entender la relación entre **modelo abstracto**, **implementación interna** y **comportamiento algorítmico**, ya que esta relación constituye la base del diseño riguroso de estructuras de datos.
 
 
-**Palabras clave** **estructuras lineales**, **listas enlazadas**, **lista enlazada simple**, **lista enlazada doble**, **representación enlazada**, **representación contigua**, **nodos**, **punteros**, **referencias**, **pilas**, **colas**, **deques**, **LIFO**, **FIFO**, **acceso por índice**, **acceso por enlace**, **inserción**, **eliminación**, **recorrido**, **complejidad temporal**, **complejidad espacial**, **invariantes**, **implementación de estructuras de datos**.
+**Palabras clave**: **estructuras lineales**, **listas enlazadas**, **lista enlazada simple**, **lista enlazada doble**, **representación enlazada**, **representación contigua**, **nodos**, **punteros**, **referencias**, **pilas**, **colas**, **deques**, **LIFO**, **FIFO**, **acceso por índice**, **acceso por enlace**, **inserción**, **eliminación**, **recorrido**, **complejidad temporal**, **complejidad espacial**, **invariantes**, **implementación de estructuras de datos**.
 
 ### **Introducción**
 
