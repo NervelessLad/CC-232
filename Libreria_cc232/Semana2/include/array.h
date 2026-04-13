@@ -1,8 +1,6 @@
 /*
  * array.h
- *
- *  Created on: 2011-11-24
- *      Author: morin
+ * Adaptado pedagogicamente para CC232 a partir del codigo de Morin.
  */
 
 #ifndef ARRAY_H_
@@ -15,11 +13,7 @@
 
 namespace ods {
 
-/**
- * A simple array class that simulates Java's arrays implementation - kind of
- * TODO: Make a reference-counted version so that the = operator doesn't have
- * to destroy its right-hand side.
- */
+//Una clase de array simple que simula la implementación de arrays de Java, más o menos.
 template<class T>
 class array {
 protected:
