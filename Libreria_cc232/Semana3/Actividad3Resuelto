@@ -44,4 +44,94 @@ El demo muestra claramente que la misma estructura base puede dar la semántica 
 Inserción local: la salida y el código contrastan que la representación enlazada (LinkedQueue / LinkedDeque / DLList) es la que “facilita inserciones/borrados locales”.
 Localidad de memoria: el demo dice explícitamente que la representación contigua ofrece mejor localidad de memoria, lo que es una ventaja frente a la lista enlazada.
 
+Bloque 3:
+
+1. Para SLList el test público valida estas operaciones mínimas:
+
+add(x) en el final de la lista
+push(x) al frente
+size()
+peek() del elemento del frente
+pop() del frente
+remove() del frente
+2. Para DLList la prueba pública valida estas operaciones mínimas:
+
+add(i, x) en posiciones específicas
+d.add(0, 10)
+d.add(1, 30)
+d.add(1, 20)
+size()
+get(i) en índices 0, 1 y 2
+remove(1)
+3. Para SEList la prueba pública valida estas operaciones mínimas:
+
+creación de SEList<int> s(3) con tamaño de bloque b = 3
+add(i, x) en posiciones crecientes (s.add(i, i) para i = 0..9)
+size()
+get(i) en índice medio (s.get(5))
+set(i, x) en índice medio (s.set(5, 50))
+remove(i) en índice medio (s.remove(5))
+4. SLList:
+-add(1, 20) inserción en posición intermedia
+-to_vector()
+-secondLast()
+-reverse()
+-checkSize()
+DLList:
+-rotate(1)
+-to_vector()
+-isPalindrome()
+-checkSize()
+MinStack:
+-push()
+-min()
+-pop()
+MinQueue
+-add()
+-remove()
+-front()
+-min()
+MinDeque:
+-addFirst()
+-addLast()
+-front()
+-back()
+-removeLast()
+-min()
+XorList:
+-push_back()
+-push_front()
+-to_vector()
+-reverse()
+5. LinkedStack:
+-empty() inicial
+-push(x) varias veces
+-size()
+-top()
+-pop()
+-empty() final
+LinkedQueue:
+-empty() inicial
+-add(x) varias veces
+-size()
+-front()
+-remove() varias veces
+-empty() final
+LinkedDeque:
+-empty() inicial
+-addFirst(x) y addLast(x)
+-size()
+-front() y back()
+-removeFirst() y removeLast()
+-empty() final
+6. Valida la integración de una capa de algoritmo común (Deng) con las estructuras base de Morin, mostrando que se puede aplicar ordenamiento, eliminación de duplicados y reversa a diferentes implementaciones usando el mismo puente/reutilización.
+7. Crecimiento con muchas inserciones al principio: s.add(i, i) 500 veces en posición 0
+borrado repetido del frente: s.remove(0) 250 veces
+re-inserciones adicionales al frente: s.add(i, -i) 100 veces
+verificación del tamaño lógico final: assert(s.size() == 350)
+8. Prueba que la lista enlazada funciona correctamente para las secuencias específicas de uso que cubre el test.
+9.Una prueba pública demuestra solo que algunos ejemplos específicos funcionan; no reemplaza entender el diseño, las invariantes, los punteros y la complejidad.
+10. Los tests confirman comportamiento puntual; la explicación de invariantes, punteros y complejidad es la que justifica que la estructura es correcta, segura y eficiente en general.
+
+
 
