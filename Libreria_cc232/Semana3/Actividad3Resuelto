@@ -15,8 +15,33 @@ Bloque 1:
 8. Es un trade-off entre acceso (mejor que lista pura) y espacio (mejor que arreglo puro), con complejidad amortizada O(b) para operaciones locales.
 9. Porque simplifica la implementación, aprovechando la eficiencia de arreglos para acceso y la flexibilidad de deques para actualizaciones.
 10. No reemplaza a las estructuras de Morin (SLList, DLList, SEList) porque estas se centran en representaciones específicas con costos optimizados para operaciones básicas (e.g., DLList para acceso bidireccional eficiente, SEList para trade-off espacio-acceso). DengList es complementaria: se usa vía MorinDengBridge para aplicar algoritmos genéricos sin reescribir lógica estructural, permitiendo reutilización pero manteniendo las ventajas de cada representación. Es una separación de concerns entre estructura y algoritmos.
+ 
+Bloque 2:
 
+1. add(10) y add(20) se comportan como cola (enqueue al final). push(5) se comporta como pila (inserta al frente). pop() elimina el primer elemento, como una pila o una cola con acceso al frente. remove() también quita del frente, mostrando que la lista usa head para desencolar.
+2. La operación que mejor muestra la inserción en posición intermedia es:
 
+d.add(1, 20);
 
+Porque inserta 20 entre 10 y 30, dejando la lista como 10 20 30. Eso es exactamente un ejemplo de inserción en el medio.
+3. El observable es la salida del for que recorre s.size() y hace s.get(i) en orden. Aunque SEList internamente usa bloques, el demo imprime los valores en secuencia lógica 0 10 20 ... 90. Eso muestra que la vista externa conserva el orden lineal esperado.
+4. lista.push_back(30) / push_back(10) / push_back(20) muestra inserciones al final. 
+lista.push_front(5) muestra inserción al frente.
+lista.front() y lista.back() muestran acceso a ambos extremos.
+lista.sort() muestra una operación algorítmica de lista más rica que no está en SLList/DLList básico.
+lista.to_vector() muestra que la lista tiene una interfaz completa para obtener su contenido en orden.
+5. cc232::stable_sort_with_deng(lista);
+int removed = cc232::dedup_with_deng(lista);
+luego imprime DLList reforzada con Deng: ... y Removido = ...
+Eso justifica la reutilización porque la salida muestra que la DLList original fue ordenada y deduplicada usando operaciones de Deng sin cambiar la implementación base de DLList. La estructura sigue siendo DLList, pero el puente aplica algoritmos de DengList para producir la lista ordenada y depurada.
+6. No basta con guardar los valores; las estructuras “min” guardan metadatos extra para poder responder min() en tiempo constante.
+7. El mejor adaptador es LinkedStack.
+
+LinkedStack reutiliza directamente SLList como almacenamiento interno.
+Ofrece una interfaz nueva de pila (push, pop, top) sobre una lista simple.
+El demo muestra claramente que la misma estructura base puede dar la semántica de un stack sin reimplementar nodos.
+8. Acceso por índice: ArrayDeque.get(4) y DLList.get(4) devuelven el mismo valor, pero la representación contigua es la que realmente explota el acceso por índice de forma natural y con mejor locality.
+Inserción local: la salida y el código contrastan que la representación enlazada (LinkedQueue / LinkedDeque / DLList) es la que “facilita inserciones/borrados locales”.
+Localidad de memoria: el demo dice explícitamente que la representación contigua ofrece mejor localidad de memoria, lo que es una ventaja frente a la lista enlazada.
 
 
