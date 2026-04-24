@@ -1,0 +1,22 @@
+Actividad 3:
+
+Nombre:Oscar Alberto Pomalia Suyo
+
+Bloque 1:
+
+1. El cambio es de una representación basada en un bloque continuo de memoria a una representación basada en nodos enlazados; eso modifica cómo accedes, cómo insertas/borras y cómo afecta el costo y el uso de memoria.
+2. -rango = índice directo en memoria contigua;
+   -posición/enlace = recorrido explícito de nodos en estructuras dinámicas enlazadas.
+3. La lista enlazada es buena para cambios locales cuando ya conoces el nodo donde operar. Pero si necesitas acceder a un elemento por su índice numérico, pierdes la ventaja de acceso directo y terminas recorriendo nodos.
+4. Ambas estructuras aprovechan operaciones en los extremos, SLList mantiene acceso rápido al primer nodo (head) y al último nodo (tail), las operaciones requeridas son O(1) porque solo actualizan punteros de uno o dos nodos, sin recorrer la lista completa.
+5. SLList es eficiente en un extremo (el frente) y puede ser eficiente en el otro extremo para inserción si guarda tail, pero no puede manejar simétricamente todas las operaciones de un Deque con el mismo costo porque le falta el enlace hacia atrás.
+6. El dummy actúa como un "ancla" que permite operaciones consistentes en una lista doblemente enlazada, facilitando la implementación sin lógica extra para casos límite.
+7. El método getNode(i) navega eficientemente: si i < n/2, avanza desde el inicio (dummy.next) i pasos; si no, retrocede desde el final (&dummy) n-i pasos. Esto toma O(min(i, n-i)) tiempo. Una vez localizado el nodo, las operaciones son O(1): get y set acceden/modifican directamente; add usa addBefore para insertar antes del nodo; remove usa removeNode para eliminar y ajustar punteros. El 1 representa la operación constante después de la navegación, aprovechando los enlaces bidireccionales para minimizar el recorrido.
+8. Es un trade-off entre acceso (mejor que lista pura) y espacio (mejor que arreglo puro), con complejidad amortizada O(b) para operaciones locales.
+9. Porque simplifica la implementación, aprovechando la eficiencia de arreglos para acceso y la flexibilidad de deques para actualizaciones.
+10. No reemplaza a las estructuras de Morin (SLList, DLList, SEList) porque estas se centran en representaciones específicas con costos optimizados para operaciones básicas (e.g., DLList para acceso bidireccional eficiente, SEList para trade-off espacio-acceso). DengList es complementaria: se usa vía MorinDengBridge para aplicar algoritmos genéricos sin reescribir lógica estructural, permitiendo reutilización pero manteniendo las ventajas de cada representación. Es una separación de concerns entre estructura y algoritmos.
+
+
+
+
+
