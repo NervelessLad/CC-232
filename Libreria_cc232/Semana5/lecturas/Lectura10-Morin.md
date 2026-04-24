@@ -22,7 +22,7 @@ En cambio, cada nodo puede ramificarse hacia otros nodos, lo que permite modelar
 Morin parte de una definición matemática: un árbol binario puede entenderse como un grafo finito, conexo, no dirigido y sin ciclos, donde ningún vértice tiene grado mayor que tres. Al enraizar el árbol, se distingue un nodo especial llamado raíz; desde ahí se definen las relaciones de padre, hijo izquierdo e hijo derecho. 
 Esta visión es importante porque muestra que la estructura no depende inicialmente de claves ni prioridades: antes de hablar de búsqueda o de heaps, se necesita comprender la estructura base del árbol binario. 
 
-En eñ código para la semana 5, esta base se vuelve operativa. El repositorio separa deliberadamente cuatro niveles: árbol binario base (`BinNode`, `BinTree`), árbol binario navegable (`BinaryTree`), árbol de búsqueda (`BinarySearchTree`) y heap implícito (`BinaryHeap`). 
+En el código para la semana 5, esta base se vuelve operativa. El repositorio separa deliberadamente cuatro niveles: árbol binario base (`BinNode`, `BinTree`), árbol binario navegable (`BinaryTree`), árbol de búsqueda (`BinarySearchTree`) y heap implícito (`BinaryHeap`). 
 Esa separación permite distinguir qué operaciones dependen únicamente de la representación enlazada y cuáles dependen de una propiedad adicional, como la propiedad de orden en un BST o la propiedad de prioridad en un heap. 
 
 ### Desarrollo
