@@ -1,8 +1,10 @@
-Actividad 3:
+## Actividad 3-CC232
 
-Nombre:Oscar Alberto Pomalia Suyo
+### Estudiante
 
-Bloque 1:
+- Nombre: Oscar Alberto Pomalia Suyo
+
+#### Bloque 1
 
 1. El cambio es de una representación basada en un bloque continuo de memoria a una representación basada en nodos enlazados; eso modifica cómo accedes, cómo insertas/borras y cómo afecta el costo y el uso de memoria.
 2. -rango = índice directo en memoria contigua;
@@ -16,7 +18,7 @@ Bloque 1:
 9. Porque simplifica la implementación, aprovechando la eficiencia de arreglos para acceso y la flexibilidad de deques para actualizaciones.
 10. No reemplaza a las estructuras de Morin (SLList, DLList, SEList) porque estas se centran en representaciones específicas con costos optimizados para operaciones básicas (e.g., DLList para acceso bidireccional eficiente, SEList para trade-off espacio-acceso). DengList es complementaria: se usa vía MorinDengBridge para aplicar algoritmos genéricos sin reescribir lógica estructural, permitiendo reutilización pero manteniendo las ventajas de cada representación. Es una separación de concerns entre estructura y algoritmos.
  
-Bloque 2:
+#### Bloque 2
 
 1. add(10) y add(20) se comportan como cola (enqueue al final). push(5) se comporta como pila (inserta al frente). pop() elimina el primer elemento, como una pila o una cola con acceso al frente. remove() también quita del frente, mostrando que la lista usa head para desencolar.
 2. La operación que mejor muestra la inserción en posición intermedia es:
@@ -44,7 +46,7 @@ El demo muestra claramente que la misma estructura base puede dar la semántica 
 Inserción local: la salida y el código contrastan que la representación enlazada (LinkedQueue / LinkedDeque / DLList) es la que “facilita inserciones/borrados locales”.
 Localidad de memoria: el demo dice explícitamente que la representación contigua ofrece mejor localidad de memoria, lo que es una ventaja frente a la lista enlazada.
 
-Bloque 3:
+#### Bloque 3
 
 1. Para SLList el test público valida estas operaciones mínimas:
 
@@ -133,5 +135,44 @@ verificación del tamaño lógico final: assert(s.size() == 350)
 9.Una prueba pública demuestra solo que algunos ejemplos específicos funcionan; no reemplaza entender el diseño, las invariantes, los punteros y la complejidad.
 10. Los tests confirman comportamiento puntual; la explicación de invariantes, punteros y complejidad es la que justifica que la estructura es correcta, segura y eficiente en general.
 
+#### Bloque 4
 
+- **reverse() en SLList:** Me pareció fascinante cómo se puede invertir la lista en una sola pasada usando tres punteros temporales para "voltear las flechas" sin crear una lista nueva.
+- **isPalindrome() en DLList:** Aprovecha que podemos caminar desde ambos extremos hacia el centro simultáneamente, comparando los valores en $O(n/2)$.
+- **Location en SEList:** Es la "dirección" de un dato: en qué bloque vive y en qué posición del arreglo interno se encuentra.
+
+#### Bloque 5
+
+- `LinkedStack` y `LinkedQueue` simplemente redirigen sus llamadas a una `SLList` interna. Es un gran ejemplo de **reutilización de código**.
+- `MinQueue` usa dos stacks para simular el comportamiento de cola y mantener el rastro del mínimo en $O(1)$ amortizado.
+
+#### Bloque 6
+
+1. Ordenamiento (`sort`), eliminación de duplicados (`deduplicate` / `uniquify`) e inversión (`reverse`).
+2. Separa responsabilidades. Morin maneja el core de la memoria, y Deng aporta algoritmos avanzados sin ensuciar ni reescribir el código base.
+3. `to_deng` envuelve la lista original para que pueda usar los algoritmos. `assign_from_deng` toma los resultados procesados y los devuelve a la lista base.
+4. Extrae los datos, los ordena usando la lógica genérica de Deng, y los reinyecta. La lista original no necesita saber cómo ordenarse a sí misma.
+5. Elimina nodos adyacentes iguales, reduciendo el tamaño en $O(n)$. Generalmente requiere que la lista esté ordenada previamente.
+6. La lógica de cambiar punteros para invertir se escribe una sola vez en el adaptador y sirve para cualquier estructura subyacente que use esa API.
+7. Introduce un costo de copia/movimiento $O(n)$. Vale la pena cuando la ganancia algorítmica (ej. un `sort` eficiente) compensa este costo.
+
+#### Bloque 7
+
+1. `ArrayDeque` usa un arreglo contiguo circular que sufre pausas costosas de `resize()`. `LinkedDeque` usa nodos, asegurando $O(1)$ constante pero sin beneficios de caché.
+2. Significa que, al estar físicamente adyacentes en la RAM, la CPU puede cargar bloques enteros a la memoria caché L1/L2 (Prefetching), siendo extremadamente rápido de leer.
+3. Inserciones masivas en el medio de la colección o uniones (splicing) de dos listas muy grandes.
+4. Para acceso aleatorio, medir ráfagas de `get(i)`. Para extremos, alternar operaciones de simulación de colas.
+5. Porque el tiempo de ejecución en milisegundos depende del hardware del alumno, carga del SO y optimizaciones del compilador en ese momento.
+6. Intenta simular una lista doblemente enlazada usando un solo "pseudo-puntero" calculado con la operación XOR entre las direcciones vecinas.
+7. Es insegura, muy difícil de depurar y hace que los algoritmos de Garbage Collection fallen por no tener punteros explícitos.
+
+#### Bloque 8 
+
+Pasar de arreglos a estructuras enlazadas es cambiar velocidad de acceso por flexibilidad. En los arreglos el acceso es instantáneo ($O(1)$) pero mover datos es costoso. En las listas enlazadas (`SLList`, `DLList`), el acceso es lento ($O(n)$) pero las inserciones son quirúrgicas y baratas. La `SEList` es el punto medio que intenta darnos lo mejor de ambos mundos. Los adaptadores cierran el círculo permitiendo que estas estructuras complejas se comporten como herramientas simples (Pilas/Colas) para resolver problemas reales.
+
+#### Autoevaluación breve
+
+- Qué puedo defender con seguridad: Entiendo bien el relinkeo de punteros en DLList y el uso de centinelas.
+- Qué todavía confundo: A veces me mareo un poco con los índices de los bloques en SEList.
+- Qué evidencia usaría en una sustentación: Usaría la demo de `reverse()` para mostrar cómo manipulo punteros físicamente.
 
